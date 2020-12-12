@@ -1,0 +1,9 @@
+{
+  "compilerOptions": {
+    "baseUrl": "./packages",
+    "paths": {
+      "@htnavarro/timer-lib": ["timer"],
+      "@htnavarro/timer-view": ["view/src"]
+    }
+  }
+}
