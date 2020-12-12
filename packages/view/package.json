@@ -1,0 +1,25 @@
+{
+  "name": "@htnavarro/timer-view",
+  "version": "1.0.0",
+  "description": "React and Typescript views and UI layer components for timer application",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/ScoobySmack2612/htn-timer.git"
+  },
+  "keywords": [
+    "React",
+    "Typescript",
+    "Timer",
+    "UI"
+  ],
+  "author": "Heron Navarro",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ScoobySmack2612/htn-timer/issues"
+  },
+  "homepage": "https://github.com/ScoobySmack2612/htn-timer#readme"
+}
