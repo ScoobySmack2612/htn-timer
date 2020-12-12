@@ -1,6 +1,6 @@
 {
   "name": "@htnavarro/timer-lib",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Timer and utility",
   "main": "index.js",
   "scripts": {
