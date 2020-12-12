@@ -2,7 +2,7 @@
   "name": "timer",
   "private": true,
   "devDependencies": {
-    "lerna": "^3.22.1",
+    "lerna": "^3.22.1"
   },
   "description": "Timer application. Monorepo, React, Typescript, OOP.",
   "license": "ISC"
