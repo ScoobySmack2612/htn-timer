@@ -2,11 +2,8 @@ module.exports = {
     roots: [
         "<rootDir>"
     ],
-    testMatch: [
-        "__test__/**/*.+(ts|tsx)",
-        "**/?(*.)+(test).+(ts|tsx)"
-    ],
+    testRegex: '(/__test__/.*|(\\.|/)(test|spec))\\.tsx?$',
     transform: {
-        "^.+\\.(ts|tsx)$": "ts-jest"
-    }
+        '^.+\\.tsx?$': 'ts-jest'
+    },
 }

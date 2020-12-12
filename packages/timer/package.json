@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "jest",
-    "compile": "tsc"
+    "compile": "tsc -p ."
   },
   "repository": {
     "type": "git",
@@ -23,12 +23,17 @@
   "homepage": "https://github.com/ScoobySmack2612/htn-timer#readme",
   "gitHead": "9d9a7213173cf250ef4efdd89bbbf9638f6bd02f",
   "devDependencies": {
+    "@babel/cli": "^7.12.10",
     "@babel/core": "^7.12.10",
     "@babel/preset-env": "^7.12.10",
     "@babel/preset-typescript": "^7.12.7",
     "@types/jest": "^26.0.19",
-    "babel-jest": "^26.6.3",
     "jest": "^26.6.3",
-    "ts-jest": "^26.4.4"
+    "ts-jest": "^26.4.4",
+    "tslint": "^5.12.1",
+    "typescript": "^3.9.7"
+  },
+  "dependencies": {
+    "moment": "^2.29.1"
   }
 }
