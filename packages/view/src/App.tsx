@@ -1,22 +1,17 @@
 import React from 'react';
-import './App.css';
 import { Navigation } from './Navigation';
-import Timer from './Timer';
-import { StyledNavigationItem } from './Navigation/navigation-styles';
-import { BrowserRouter as Router, Switch } from 'react-router-dom';
+import { BrowserRouter as Router } from 'react-router-dom';
+import { Pages } from './Pages';
+import { StyledApplicationContainer } from './app-styles';
 
 function App() {
     return (
         <div className="App">
             <Router>
-                <Navigation>
-                    <StyledNavigationItem>
-                        <Timer.NavigationItem />
-                    </StyledNavigationItem>
-                </Navigation>
-                <Switch>
-                    <Timer.Route />
-                </Switch>
+                <StyledApplicationContainer>
+                    <Pages />
+                    <Navigation />
+                </StyledApplicationContainer>
             </Router>
         </div>
     );

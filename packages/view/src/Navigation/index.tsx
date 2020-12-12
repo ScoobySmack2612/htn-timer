@@ -1,7 +1,13 @@
-import { BrowserRouter as Router } from 'react-router-dom';
-import { StyledNavigation } from './navigation-styles';
-import { FunctionComponent } from 'react';
+import { StyledNavigation, StyledNavigationItem } from './navigation-styles';
+import React, { FunctionComponent } from 'react';
+import Stopwatch from '../Pages/Stopwatch';
 
-export const Navigation: FunctionComponent = ({ children }) => {
-    return <StyledNavigation>{children}</StyledNavigation>;
+export const Navigation: FunctionComponent = () => {
+    return (
+        <StyledNavigation>
+            <StyledNavigationItem>
+                <Stopwatch.NavigationItem />
+            </StyledNavigationItem>
+        </StyledNavigation>
+    );
 };
