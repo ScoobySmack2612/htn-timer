@@ -1,9 +1,19 @@
-import { FunctionComponent } from 'react';
+import { FunctionComponent, useMemo } from 'react';
+import { StyledDigitalClockReading, StyledDigitalClockContainer } from './digital-clock-styles';
+import { ElapsedTime } from '@htnavarro/timer-lib';
+import moment from 'moment';
 
-const DigitalClock: FunctionComponent = () => {
+const DigitalClock: FunctionComponent<ElapsedTime> = (props) => {
+    const { minutes, seconds, milliseconds } = props;
+    const displayFormatForTime = useMemo(
+        () => moment().minutes(minutes).seconds(seconds).milliseconds(milliseconds).format('mm:ss:SS'),
+        [minutes, seconds, milliseconds]
+    );
     return (
         <article>
-            <p></p>:<p></p>.<p></p>
+            <StyledDigitalClockContainer>
+                <StyledDigitalClockReading>{displayFormatForTime}</StyledDigitalClockReading>
+            </StyledDigitalClockContainer>
         </article>
     );
 };

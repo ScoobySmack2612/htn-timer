@@ -1,11 +1,20 @@
 import styled, { css } from 'styled-components';
 
 const GLOBALS = css`
+    html {
+        height: 100%;
+    }
     html,
+    body,
+    main,
+    .fullheight,
+    html body div {
+        min-height: 100% !important;
+        height: 100vh;
+    }
     body {
         font: 13px/1.231 arial, helvetica, clean, sans-serif;
         min-height: 100%;
-        color: #444;
         line-height: 1.4;
     }
 
@@ -241,133 +250,133 @@ const GLOBALS = css`
             _width: 0;
             padding: 0.2em 0.4em;
         }
+    }
 
-        a:link,
-        a:visited {
-            color: #000;
-        }
+    a:link,
+    a:visited {
+        color: #d2d2d2 !important;
+    }
 
-        a:focus,
-        :focus {
-            outline: 1px dotted #000;
-        }
+    a:focus,
+    :focus {
+        outline: 1px dotted #000;
+    }
 
-        a:active,
-        input:active,
-        select:active,
-        textarea:active {
-            outline: none;
-        }
+    a:active,
+    input:active,
+    select:active,
+    textarea:active {
+        outline: none;
+    }
 
-        .grouped:after {
-            visibility: hidden;
-            display: block;
-            font-size: 0;
-            content: ' ';
-            clear: both;
-            height: 0;
-        }
+    .grouped:after {
+        visibility: hidden;
+        display: block;
+        font-size: 0;
+        content: ' ';
+        clear: both;
+        height: 0;
+    }
 
-        .grouped {
-            display: inline-block;
-        }
+    .grouped {
+        display: inline-block;
+    }
 
-        * html .grouped {
-            height: 1%;
-        }
+    * html .grouped {
+        height: 1%;
+    }
 
-        .grouped {
-            display: block;
-        }
+    .grouped {
+        display: block;
+    }
 
-        .notice,
-        .alert {
-            margin-top: 0px;
-            padding: 5px;
-        }
+    .notice,
+    .alert {
+        margin-top: 0px;
+        padding: 5px;
+    }
 
-        .notice {
-            border: solid 1px #99cc99;
-            background-color: #e2f9e3;
-            color: #006600;
-        }
+    .notice {
+        border: solid 1px #99cc99;
+        background-color: #e2f9e3;
+        color: #006600;
+    }
 
-        .alert {
-            border: 1px solid #cc0000;
-            background-color: #eeaaaa;
-            color: #cc0000;
-        }
+    .alert {
+        border: 1px solid #cc0000;
+        background-color: #eeaaaa;
+        color: #cc0000;
+    }
 
-        label {
-            width: 120px;
-            display: inline-block;
-        }
+    label {
+        width: 120px;
+        display: inline-block;
+    }
 
-        abbr {
-            cursor: default;
-            border: none;
-        }
+    abbr {
+        cursor: default;
+        border: none;
+    }
 
-        input,
-        textarea {
-            font-size: 110%;
-        }
+    input,
+    textarea {
+        font-size: 110%;
+    }
 
-        select {
-            font-size: 120%;
-        }
+    select {
+        font-size: 120%;
+    }
 
-        input[type='text']:focus,
-        input[type='password']:focus,
-        input[type='file']:focus,
-        input[type='email']:focus,
-        textarea:focus,
-        select:focus {
-            border: 2px solid #2c2c2c;
-        }
+    input[type='text']:focus,
+    input[type='password']:focus,
+    input[type='file']:focus,
+    input[type='email']:focus,
+    textarea:focus,
+    select:focus {
+        border: 2px solid #2c2c2c;
+    }
 
-        input[type='text'],
-        input[type='password'],
-        input[type='file'],
-        input[type='email'],
-        textarea,
-        select {
-            width: 300px;
-            -moz-border-radius: 5px;
-            -webkit-border-radius: 5px;
-            border-radius: 5px;
-            border: 2px solid #d2d1cf;
-            color: #555555;
-            outline: 0 none;
-            padding: 5px;
-        }
+    input[type='text'],
+    input[type='password'],
+    input[type='file'],
+    input[type='email'],
+    textarea,
+    select {
+        width: 300px;
+        -moz-border-radius: 5px;
+        -webkit-border-radius: 5px;
+        border-radius: 5px;
+        border: 2px solid #d2d1cf;
+        color: #555555;
+        outline: 0 none;
+        padding: 5px;
+    }
 
-        form .input label {
-            vertical-align: middle;
-        }
+    form .input label {
+        vertical-align: middle;
+    }
 
-        form .input.text label {
-            vertical-align: top;
-        }
+    form .input.text label {
+        vertical-align: top;
+    }
 
-        .field_with_errors input[type='text'],
-        .field_with_errors input[type='password'],
-        .field_with_errors input[type='file'],
-        .field_with_errors textarea,
-        .field_with_errors select {
-            border: 2px solid #e0a7a7;
-        }
+    .field_with_errors input[type='text'],
+    .field_with_errors input[type='password'],
+    .field_with_errors input[type='file'],
+    .field_with_errors textarea,
+    .field_with_errors select {
+        border: 2px solid #e0a7a7;
+    }
 
-        .field_with_errors input[type='text']:focus,
-        .field_with_errors input[type='password']:focus,
-        .field_with_errors input[type='file']:focus,
-        .field_with_errors textarea:focus {
-            border: 2px solid #b22222;
-        }
+    .field_with_errors input[type='text']:focus,
+    .field_with_errors input[type='password']:focus,
+    .field_with_errors input[type='file']:focus,
+    .field_with_errors textarea:focus {
+        border: 2px solid #b22222;
+    }
 
-        .field_with_errors .error {
-            padding-left: 10px;
-        }
+    .field_with_errors .error {
+        padding-left: 10px;
     }
 `;
 
@@ -377,4 +386,53 @@ export const StyledApplicationContainer = styled.div`
     margin: 0 auto;
     background-color: rgba(0, 0, 0, 0.88);
     min-height: 100vh;
+`;
+
+export const StyledRoundedButton = css`
+    border-radius: 50%;
+    box-shadow: inset 0 0 0 2px rgba(0, 0, 0, 1);
+`;
+export const AccessibleInteraction = css`
+    text-decoration: none;
+    &:hover {
+        text-decoration: underline;
+    }
+`;
+
+const ButtonAnimationTiming = '.28s';
+export const ButtonAnimationUnderlineFromCenter = css`
+    display: inline-block;
+    vertical-align: middle;
+    -webkit-transform: perspective(1px) translateZ(0);
+    transform: perspective(1px) translateZ(0);
+    box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+    position: relative;
+    overflow: hidden;
+    &:before {
+        content: '';
+        position: absolute;
+        z-index: -1;
+        left: 51%;
+        right: 51%;
+        bottom: 0;
+        background: #2098d1;
+        height: 4px;
+        -webkit-transition-property: left, right;
+        transition-property: left, right;
+        -webkit-transition-duration: ${ButtonAnimationTiming};
+        transition-duration: ${ButtonAnimationTiming};
+        -webkit-transition-timing-function: ease-out;
+        transition-timing-function: ease-out;
+    }
+    &:hover:before {
+        left: 0;
+        right: 0;
+    }
+`;
+export const LinkAsButton = css`
+    ${ButtonAnimationUnderlineFromCenter};
+    ${AccessibleInteraction};
+    height: 100%;
+    display: flex;
+    align-items: center;
 `;

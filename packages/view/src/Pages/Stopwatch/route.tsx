@@ -1,7 +1,7 @@
 import { Route } from 'react-router-dom';
 import React from 'react';
-import Stopwatch from './index';
+import StopwatchPage from './index';
 
-const StopwatchRoute = () => <Route path="/" component={Stopwatch} />;
+const StopwatchRoute = () => <Route path="/" component={StopwatchPage} />;
 
 export default StopwatchRoute;
