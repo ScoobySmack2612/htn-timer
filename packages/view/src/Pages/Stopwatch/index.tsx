@@ -1,9 +1,8 @@
-import React, { FunctionComponent, useEffect, useMemo, useState } from 'react';
+import React, { FunctionComponent, useEffect, useState } from 'react';
 import StopwatchRoute from './route';
 import StopwatchNavigationItem from './navigation';
 import DigitalClock from './DigitalClock';
 import ControlBar from './ControlBar';
-import moment from 'moment';
 import { ElapsedTime, Stopwatch } from '@htnavarro/timer-lib';
 import { StyledStopwatchContainer } from './stopwatch-styles';
 import LapTable from './LapTable';
@@ -36,8 +35,6 @@ const StopwatchPage: FunctionComponent & {
     };
 
     const stopStopwatch = () => {
-        const endAt = moment();
-
         stopwatch.stop();
         setInProgress(false);
     };

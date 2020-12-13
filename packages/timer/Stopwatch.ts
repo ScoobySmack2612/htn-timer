@@ -40,8 +40,6 @@ class Stopwatch {
     private setRunningPauseTime(startedAt, pausedAt) {
         const diffInMilliseconds = pausedAt.diff(startedAt, 'milliseconds', true);
 
-        console.log({ diffInMilliseconds, startedAt, pausedAt });
-
         this.runningPauseTime += diffInMilliseconds;
     }
 
@@ -60,12 +58,9 @@ class Stopwatch {
             this.startedAt = startedAt;
         }
 
-        /* todo fix restarting
         if (this.endedAt) {
-            console.log(this.endedAt, this.startedAt, this.endedAt, startedAt);
             this.setRunningPauseTime(startedAt, this.endedAt);
         }
-         */
     };
 
     stop = (stopAt: Moment = moment()) => {
