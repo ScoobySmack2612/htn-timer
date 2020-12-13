@@ -1,4 +1,2 @@
-import { Timer } from './Timer';
-import { Stopwatch } from './Stopwatch';
-
-export { Timer, Stopwatch };
+export { default as Timer } from './Timer';
+export { default as Stopwatch } from './Stopwatch';

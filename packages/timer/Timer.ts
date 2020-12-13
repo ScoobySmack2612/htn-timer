@@ -6,7 +6,7 @@ type TimerConfiguration = {
     seconds?: number;
     hours?: number;
 };
-export class Timer {
+class Timer {
     expires: Moment;
     seconds: number;
     milliseconds: number;
@@ -50,3 +50,5 @@ export class Timer {
         this.setExpiration(startedAt);
     }
 }
+
+export default Timer;

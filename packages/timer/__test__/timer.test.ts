@@ -1,5 +1,5 @@
 import moment from 'moment';
-import { Timer } from '../Timer';
+import Timer from '../Timer';
 
 describe('Timer', () => {
     it('Timer initializes', () => {

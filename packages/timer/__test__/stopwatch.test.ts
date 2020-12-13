@@ -1,5 +1,5 @@
 import moment from 'moment';
-import { Stopwatch } from '../Stopwatch';
+import Stopwatch from '../Stopwatch';
 
 describe('Stopwatch', () => {
     it('should initialize', () => {

@@ -3,7 +3,7 @@ import moment, { Moment } from 'moment';
 type StopwatchConfiguration = {
     startedAt?: Moment;
 };
-export class Stopwatch {
+class Stopwatch {
     startedAt: Moment | null;
     laps: [Moment];
 
@@ -46,3 +46,5 @@ export class Stopwatch {
         };
     }
 }
+
+export default Stopwatch;
