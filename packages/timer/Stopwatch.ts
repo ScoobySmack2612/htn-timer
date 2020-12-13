@@ -1,10 +1,18 @@
 import moment, { Moment } from 'moment';
 
-type StopwatchConfiguration = {
+export type StopwatchConfiguration = {
     startedAt?: Moment;
 };
+
+export type StopwatchElapsedTime = {
+    minutes: number;
+    seconds: number;
+    milliseconds: number;
+};
+
 class Stopwatch {
     startedAt: Moment | null;
+    endedAt: Moment | null;
     laps: [Moment];
 
     constructor(configuration?: StopwatchConfiguration) {
@@ -15,18 +23,38 @@ class Stopwatch {
         }
 
         this.startedAt = null;
+        this.endedAt = null;
     }
 
-    start(startedAt: Moment = moment()) {
+    start = (startedAt: Moment = moment()) => {
         this.startedAt = startedAt;
-    }
+    };
 
-    lap(lappedAt: Moment = moment()) {
+    stop = (stopAt: Moment = moment()) => {
+        if (!this.endedAt) {
+            this.endedAt = stopAt;
+        }
+
+        this.startedAt = null;
+        this.endedAt = null;
+    };
+
+    lap = (lappedAt: Moment = moment()) => {
         this.laps.push(lappedAt);
-    }
+    };
 
-    reportElapsedTime(reportAt: Moment = moment()) {
-        const diffInMilliseconds = reportAt.diff(this.startedAt, 'milliseconds', true);
+    reportElapsedTime = (reportAt: Moment = moment()): StopwatchElapsedTime => {
+        if (!this.startedAt) {
+            return {
+                minutes: 0,
+                seconds: 0,
+                milliseconds: 0
+            };
+        }
+
+        const reportAtBase = !!this.endedAt ? this.endedAt : reportAt;
+
+        const diffInMilliseconds = reportAtBase.diff(this.startedAt, 'milliseconds', true);
         const diffInRoundedSeconds = Math.floor(diffInMilliseconds / 1000).toFixed(0);
         const roundedSecondsInMilliseconds = Math.floor(parseInt(diffInRoundedSeconds) * 1000);
 
@@ -44,7 +72,7 @@ class Stopwatch {
             seconds,
             milliseconds
         };
-    }
+    };
 }
 
 export default Stopwatch;
