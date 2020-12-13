@@ -29,7 +29,9 @@ const ControlBar: FunctionComponent<ControlBarProps> = ({ inProgress, isDirty, s
             <StyledControlButton disabled={!inProgress && !isDirty} onClick={controls.secondary.handler}>
                 {controls.secondary.name}
             </StyledControlButton>
-            <StyledControlButton onClick={controls.primary.handler}>{controls.primary.name}</StyledControlButton>
+            <StyledControlButton onClick={controls.primary.handler} mode={inProgress ? 'STOP' : 'GO'}>
+                {controls.primary.name}
+            </StyledControlButton>
         </StyledControlBar>
     );
 };
