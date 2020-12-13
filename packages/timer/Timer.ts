@@ -1,10 +1,10 @@
 import moment, { Moment } from 'moment';
 
-type TimerConfiguration = {
+interface TimerConfiguration {
     expires?: Moment;
-    milliseconds?: number
-    seconds?: number
-    hours?: number
+    milliseconds?: number;
+    seconds?: number;
+    hours?: number;
 }
 export class Timer {
     expires: Moment;
@@ -40,13 +40,13 @@ export class Timer {
 
     setExpiration(startedAt: Moment) {
         const millisInHours = Math.floor(this.hours * 60 * 60 * 1000);
+        // const millisInMinutes = Math.floor(this.minutes * 60 * 1000);
         const millisInSeconds = Math.floor(this.seconds * 1000);
 
-        this.expires = moment(startedAt).add(millisInHours + millisInSeconds + this.milliseconds, 'milliseconds')
+        this.expires = moment(startedAt).add(millisInHours + millisInSeconds + this.milliseconds, 'milliseconds');
     }
 
     start(startedAt: Moment = moment()) {
-        this.setExpiration(startedAt)
+        this.setExpiration(startedAt);
     }
-
 }

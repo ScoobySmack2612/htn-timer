@@ -1,9 +1,13 @@
 {
   "compilerOptions": {
     "baseUrl": "./packages",
+    "removeComments": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
     "paths": {
       "@htnavarro/timer-lib": ["timer"],
       "@htnavarro/timer-view": ["view/src"]
     }
-  }
+  },
+  "exclude": ["node_modules", "__test__"]
 }

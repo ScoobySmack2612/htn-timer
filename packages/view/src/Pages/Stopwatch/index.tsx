@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from 'react';
 import StopwatchRoute from './route';
 import StopwatchNavigationItem from './navigation';
-import StopwatchSlider from './StopwatchSlider';
+import DigitalClock from './DigitalClock';
 import ControlBar from './ControlBar';
 
 export interface TimerProps {}
@@ -12,7 +12,7 @@ const Stopwatch: FunctionComponent & {
 } = () => {
     return (
         <div>
-            <StopwatchSlider />
+            <DigitalClock />
             <ControlBar />
         </div>
     );
