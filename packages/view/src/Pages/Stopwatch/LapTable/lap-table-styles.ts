@@ -6,14 +6,13 @@ export const StyledLapTable = styled.div`
 `;
 
 export const StyledLapEntry = styled.p`
-    ::after {
-        content: '';
-        position: absolute;
-        width: 100%;
-        height: 100%;
-        border: 1px solid #ccc;
-        left: 30px;
-        top: -30px;
-        z-index: -1;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    color: #d2d2d2;
+    border-bottom: 1px solid #ccc;
+
+    && {
+        padding-bottom: 10px;
     }
 `;

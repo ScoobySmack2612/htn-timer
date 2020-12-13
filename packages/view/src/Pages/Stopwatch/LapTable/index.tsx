@@ -10,7 +10,8 @@ const LapTable: FunctionComponent<{ laps: Set<ElapsedTime> }> = ({ laps }) => {
                 .map((lap: ElapsedTime, lapNumber: number) => {
                     return (
                         <StyledLapEntry>
-                            {lapNumber + 1} {getStopwatchDateFromElapsedTime(lap)}
+                            <span>{lapNumber + 1}</span>
+                            <span>{getStopwatchDateFromElapsedTime(lap)}</span>
                         </StyledLapEntry>
                     );
                 })
