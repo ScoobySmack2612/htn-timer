@@ -1,10 +1,13 @@
 {
   "name": "@htnavarro/timer-lib",
-  "version": "1.0.5",
+  "version": "1.5.0",
   "description": "Timer and utility",
-  "main": "index.js",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "prepublish": "tsc -p .",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest",
+    "compile": "tsc -p ."
   },
   "repository": {
     "type": "git",
@@ -20,5 +23,18 @@
     "url": "https://github.com/ScoobySmack2612/htn-timer/issues"
   },
   "homepage": "https://github.com/ScoobySmack2612/htn-timer#readme",
-  "gitHead": "9d9a7213173cf250ef4efdd89bbbf9638f6bd02f"
+  "gitHead": "9d9a7213173cf250ef4efdd89bbbf9638f6bd02f",
+  "devDependencies": {
+    "@babel/cli": "^7.12.10",
+    "@babel/core": "^7.12.10",
+    "@babel/preset-env": "^7.12.10",
+    "@babel/preset-typescript": "^7.12.7",
+    "@types/jest": "^26.0.19",
+    "jest": "^26.6.3",
+    "ts-jest": "^26.4.4",
+    "typescript": "^4.1.3"
+  },
+  "dependencies": {
+    "moment": "^2.29.1"
+  }
 }
