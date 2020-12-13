@@ -4,18 +4,25 @@ export type StopwatchConfiguration = {
     startedAt?: Moment;
 };
 
-export type StopwatchElapsedTime = {
+export type ElapsedTime = {
     minutes: number;
     seconds: number;
     milliseconds: number;
 };
 
-class Stopwatch {
-    startedAt: Moment | null;
-    endedAt: Moment | null;
-    laps: [Moment];
+export type StopwatchLaps = Set<ElapsedTime>;
 
+class Stopwatch {
+    inProgress: boolean;
+    startedAt: Moment | null;
+    runningPauseTime: number;
+    endedAt: Moment | null;
+    private laps: StopwatchLaps;
     constructor(configuration?: StopwatchConfiguration) {
+        if (!instance) {
+            instance = this;
+        }
+
         if (typeof configuration === 'object') {
             const { startedAt } = configuration;
 
@@ -24,26 +31,52 @@ class Stopwatch {
 
         this.startedAt = null;
         this.endedAt = null;
+        this.runningPauseTime = 0;
+
+        return instance;
     }
 
+    private setRunningPauseTime(startedAt, pausedAt) {
+        const diffInMilliseconds = pausedAt.diff(startedAt, 'milliseconds', true);
+
+        console.log({ diffInMilliseconds, startedAt, pausedAt });
+
+        this.runningPauseTime += diffInMilliseconds;
+    }
+
+    reset = () => {
+        this.startedAt = null;
+        this.endedAt = null;
+        this.laps = null;
+        this.runningPauseTime = 0;
+        this.inProgress = false;
+    };
+
     start = (startedAt: Moment = moment()) => {
-        this.startedAt = startedAt;
+        this.inProgress = true;
+        if (!this.startedAt) {
+            this.startedAt = startedAt;
+        }
+
+        if (this.endedAt) {
+            console.log(this.endedAt, this.startedAt, this.endedAt, startedAt);
+            this.setRunningPauseTime(startedAt, this.endedAt);
+        }
     };
 
     stop = (stopAt: Moment = moment()) => {
-        if (!this.endedAt) {
-            this.endedAt = stopAt;
-        }
-
-        this.startedAt = null;
-        this.endedAt = null;
+        this.endedAt = stopAt;
     };
 
     lap = (lappedAt: Moment = moment()) => {
-        this.laps.push(lappedAt);
+        this.laps.add(this.reportElapsedTime(lappedAt));
     };
 
-    reportElapsedTime = (reportAt: Moment = moment()): StopwatchElapsedTime => {
+    getLaps(): Set<ElapsedTime> {
+        return this.laps;
+    }
+
+    reportElapsedTime = (reportAt: Moment = moment()): ElapsedTime => {
         if (!this.startedAt) {
             return {
                 minutes: 0,
@@ -52,15 +85,22 @@ class Stopwatch {
             };
         }
 
-        const reportAtBase = !!this.endedAt ? this.endedAt : reportAt;
+        const reportAtBase = this.endedAt || reportAt;
 
         const diffInMilliseconds = reportAtBase.diff(this.startedAt, 'milliseconds', true);
+        console.log(
+            'calculate time',
+            { diff: reportAtBase.diff(this.startedAt, 'milliseconds', true) },
+            diffInMilliseconds,
+            this.runningPauseTime
+        );
         const diffInRoundedSeconds = Math.floor(diffInMilliseconds / 1000).toFixed(0);
         const roundedSecondsInMilliseconds = Math.floor(parseInt(diffInRoundedSeconds) * 1000);
 
         const diffInHours = parseInt(diffInRoundedSeconds) / 3600;
         if (diffInHours >= 1) {
-            throw Error('Out of stopwatch bounds');
+            this.stop();
+            throw Error('Out of stopwatch bounds, exiting');
         }
 
         const minutes = Math.floor(diffInMilliseconds / 60000);
@@ -74,5 +114,7 @@ class Stopwatch {
         };
     };
 }
+
+let instance = null;
 
 export default Stopwatch;

@@ -2,6 +2,9 @@ import moment from 'moment';
 import Stopwatch from '../Stopwatch';
 
 describe('Stopwatch', () => {
+    beforeEach(() => {
+        new Stopwatch().reset();
+    });
     it('should initialize', () => {
         const stopwatch = new Stopwatch();
         expect(stopwatch).toHaveProperty('startedAt');
@@ -19,8 +22,9 @@ describe('Stopwatch', () => {
         const oneMillisecondElapsedTime = moment().add(1, 'millisecond');
         const stopwatch = new Stopwatch();
         stopwatch.start(startedAt);
+        stopwatch.stop(oneMillisecondElapsedTime);
         expect(stopwatch).toHaveProperty('startedAt');
-        expect(stopwatch.reportElapsedTime(oneMillisecondElapsedTime)).toEqual({
+        expect(stopwatch.reportElapsedTime()).toEqual({
             minutes: 0,
             seconds: 0,
             milliseconds: 1
@@ -32,8 +36,9 @@ describe('Stopwatch', () => {
         const oneSecondOneMillisecondElapsedTime = moment(oneMillisecondElapsedTime).add(1, 'second');
         const stopwatch = new Stopwatch();
         stopwatch.start(startedAt);
+        stopwatch.stop(oneSecondOneMillisecondElapsedTime);
         expect(stopwatch).toHaveProperty('startedAt');
-        expect(stopwatch.reportElapsedTime(oneSecondOneMillisecondElapsedTime)).toEqual({
+        expect(stopwatch.reportElapsedTime()).toEqual({
             minutes: 0,
             seconds: 1,
             milliseconds: 1
@@ -46,8 +51,9 @@ describe('Stopwatch', () => {
         const oneMinuteOneSecondOneMillisecondElapsedTime = moment(oneSecondOneMillisecondElapsedTime).add(1, 'minute');
         const stopwatch = new Stopwatch();
         stopwatch.start(startedAt);
+        stopwatch.stop(oneMinuteOneSecondOneMillisecondElapsedTime);
         expect(stopwatch).toHaveProperty('startedAt');
-        expect(stopwatch.reportElapsedTime(oneMinuteOneSecondOneMillisecondElapsedTime)).toEqual({
+        expect(stopwatch.reportElapsedTime()).toEqual({
             minutes: 1,
             seconds: 1,
             milliseconds: 1
@@ -60,14 +66,13 @@ describe('Stopwatch', () => {
         const oneMinuteOneSecondOneMillisecondElapsedTime = moment(oneSecondOneMillisecondElapsedTime).add(1, 'minute');
         const stopwatch = new Stopwatch();
         stopwatch.start(startedAt);
+        stopwatch.stop(oneMinuteOneSecondOneMillisecondElapsedTime);
         expect(stopwatch).toHaveProperty('startedAt');
-        expect(stopwatch.reportElapsedTime(oneMinuteOneSecondOneMillisecondElapsedTime)).toEqual({
+        expect(stopwatch.reportElapsedTime()).toEqual({
             minutes: 1,
             seconds: 1,
             milliseconds: 1
         });
-
-        stopwatch.stop(oneMinuteOneSecondOneMillisecondElapsedTime);
 
         setTimeout(() => {
             expect(stopwatch.reportElapsedTime()).toEqual({
@@ -84,18 +89,41 @@ describe('Stopwatch', () => {
         const oneMinuteOneSecondOneMillisecondElapsedTime = moment(oneSecondOneMillisecondElapsedTime).add(1, 'minute');
         const stopwatch = new Stopwatch();
         stopwatch.start(startedAt);
+        stopwatch.stop(oneMinuteOneSecondOneMillisecondElapsedTime);
         expect(stopwatch).toHaveProperty('startedAt');
-        expect(stopwatch.reportElapsedTime(oneMinuteOneSecondOneMillisecondElapsedTime)).toEqual({
+        expect(stopwatch.reportElapsedTime()).toEqual({
             minutes: 1,
             seconds: 1,
             milliseconds: 1
         });
 
-        stopwatch.stop(oneMinuteOneSecondOneMillisecondElapsedTime);
-        stopwatch.stop(oneMinuteOneSecondOneMillisecondElapsedTime);
+        stopwatch.reset();
 
         expect(stopwatch.reportElapsedTime()).toEqual({
             minutes: 0,
+            seconds: 0,
+            milliseconds: 0
+        });
+    });
+
+    it('should account for pause time', () => {
+        const startedAt = moment();
+        const oneMinuteElapsedTime = moment(startedAt).add(1, 'minute');
+        const stopwatch = new Stopwatch();
+        stopwatch.start(startedAt);
+        expect(stopwatch).toHaveProperty('startedAt');
+        stopwatch.stop(oneMinuteElapsedTime);
+        expect(stopwatch.reportElapsedTime()).toEqual({
+            minutes: 1,
+            seconds: 0,
+            milliseconds: 0
+        });
+
+        const oneMinElapsedTimePausedOneMinute = oneMinuteElapsedTime.add(1, 'minute');
+        stopwatch.start(oneMinElapsedTimePausedOneMinute);
+        stopwatch.stop(oneMinElapsedTimePausedOneMinute);
+        expect(stopwatch.reportElapsedTime()).toEqual({
+            minutes: 1,
             seconds: 0,
             milliseconds: 0
         });
