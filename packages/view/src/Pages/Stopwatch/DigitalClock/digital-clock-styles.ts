@@ -8,6 +8,7 @@ export const StyledDigitalClockContainer = styled.div`
 `;
 export const StyledDigitalClockReading = styled.p`
     && {
+        font-family: 'Helvetica Neue', 'serif';
         margin: 0;
         color: white;
     }
