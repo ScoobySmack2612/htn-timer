@@ -22,7 +22,8 @@
     "jsx": "react-jsx",
     "sourceMap": true,
     "inlineSources": true,
-    "outDir": "dist/"
+    "outDir": "dist/",
+    "downlevelIteration": true
   },
   "include": [
     "src/**/*"

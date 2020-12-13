@@ -7,7 +7,7 @@ export const StyledTimerRouteLink = styled(Link)`
 `;
 
 export const StyledStopwatchContainer = styled.div`
-    width: 30%;
+    width: 18%;
     margin: 0 auto;
     display: flex;
     flex-direction: column;

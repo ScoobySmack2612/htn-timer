@@ -32,6 +32,7 @@ class Stopwatch {
         this.startedAt = null;
         this.endedAt = null;
         this.runningPauseTime = 0;
+        this.laps = new Set();
 
         return instance;
     }
@@ -50,6 +51,7 @@ class Stopwatch {
         this.laps = null;
         this.runningPauseTime = 0;
         this.inProgress = false;
+        this.laps = new Set();
     };
 
     start = (startedAt: Moment = moment()) => {
@@ -58,18 +60,20 @@ class Stopwatch {
             this.startedAt = startedAt;
         }
 
+        /* todo fix restarting
         if (this.endedAt) {
             console.log(this.endedAt, this.startedAt, this.endedAt, startedAt);
             this.setRunningPauseTime(startedAt, this.endedAt);
         }
+         */
     };
 
     stop = (stopAt: Moment = moment()) => {
         this.endedAt = stopAt;
     };
 
-    lap = (lappedAt: Moment = moment()) => {
-        this.laps.add(this.reportElapsedTime(lappedAt));
+    lap = () => {
+        this.laps.add(this.reportElapsedTime());
     };
 
     getLaps(): Set<ElapsedTime> {
@@ -88,12 +92,6 @@ class Stopwatch {
         const reportAtBase = this.endedAt || reportAt;
 
         const diffInMilliseconds = reportAtBase.diff(this.startedAt, 'milliseconds', true);
-        console.log(
-            'calculate time',
-            { diff: reportAtBase.diff(this.startedAt, 'milliseconds', true) },
-            diffInMilliseconds,
-            this.runningPauseTime
-        );
         const diffInRoundedSeconds = Math.floor(diffInMilliseconds / 1000).toFixed(0);
         const roundedSecondsInMilliseconds = Math.floor(parseInt(diffInRoundedSeconds) * 1000);
 

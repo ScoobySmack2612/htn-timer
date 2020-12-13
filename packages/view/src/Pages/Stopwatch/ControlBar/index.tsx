@@ -18,8 +18,8 @@ const ControlBar: FunctionComponent<ControlBarProps> = ({ inProgress, isDirty, s
                 name: inProgress && isDirty ? 'Stop' : 'Start'
             },
             secondary: {
-                handler: isDirty ? reset : lap,
-                name: isDirty ? 'Reset' : 'Lap'
+                handler: isDirty && !inProgress ? reset : lap,
+                name: isDirty && !inProgress ? 'Reset' : 'Lap'
             }
         };
     })();

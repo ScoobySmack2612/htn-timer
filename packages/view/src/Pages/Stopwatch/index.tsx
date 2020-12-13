@@ -4,29 +4,26 @@ import StopwatchNavigationItem from './navigation';
 import DigitalClock from './DigitalClock';
 import ControlBar from './ControlBar';
 import moment from 'moment';
-import { ElapsedTime, Stopwatch, StopwatchLaps } from '@htnavarro/timer-lib';
+import { ElapsedTime, Stopwatch } from '@htnavarro/timer-lib';
 import { StyledStopwatchContainer } from './stopwatch-styles';
+import LapTable from './LapTable';
 
 const StopwatchPage: FunctionComponent & {
     Route: typeof StopwatchRoute;
     NavigationItem: typeof StopwatchNavigationItem;
 } = () => {
     const [elapsedTime, setElapsedTime] = useState<ElapsedTime>({ minutes: 0, seconds: 0, milliseconds: 0 });
-    const [laps, setLaps] = useState<Set<StopwatchLaps>>(new Set());
+    const [laps, setLaps] = useState<Set<ElapsedTime>>(new Set());
     const [inProgress, setInProgress] = useState(false);
-    const stopwatch = useMemo(() => new Stopwatch(), []);
-
-    let mountInterval = () => {
-        return setInterval(() => {
-            setElapsedTime(stopwatch.reportElapsedTime());
-        }, 1);
-    };
+    const stopwatch = new Stopwatch();
 
     useEffect(() => {
         let interval: NodeJS.Timeout;
         if (stopwatch.inProgress) {
             // @ts-ignore
-            interval = mountInterval();
+            interval = setInterval(() => {
+                setElapsedTime(stopwatch.reportElapsedTime());
+            }, 1);
         }
         return () => {
             clearInterval(interval);
@@ -49,27 +46,29 @@ const StopwatchPage: FunctionComponent & {
         stopwatch.reset();
         setElapsedTime(stopwatch.reportElapsedTime());
         setInProgress(false);
+        setLaps(stopwatch.getLaps());
     };
 
     const lapStopwatch = () => {
         stopwatch.lap();
-        stopwatch.getLaps();
+        setLaps(stopwatch.getLaps());
     };
+
+    const isStopwatchAtZero =
+        (Object.keys(elapsedTime) as Array<keyof ElapsedTime>).filter((k) => elapsedTime[k] !== 0).length === 0;
 
     return (
         <StyledStopwatchContainer>
             <DigitalClock {...elapsedTime} />
             <ControlBar
                 inProgress={inProgress}
-                isDirty={
-                    (Object.keys(elapsedTime) as Array<keyof ElapsedTime>).filter((k) => elapsedTime[k] !== 0).length >
-                    0
-                }
+                isDirty={!isStopwatchAtZero}
                 start={startStopwatch}
                 stop={stopStopwatch}
                 reset={resetStopwatch}
                 lap={lapStopwatch}
             />
+            <LapTable laps={laps} />
         </StyledStopwatchContainer>
     );
 };
