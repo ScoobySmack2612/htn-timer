@@ -1,11 +1,11 @@
 import moment, { Moment } from 'moment';
 
-interface TimerConfiguration {
+type TimerConfiguration = {
     expires?: Moment;
     milliseconds?: number;
     seconds?: number;
     hours?: number;
-}
+};
 export class Timer {
     expires: Moment;
     seconds: number;

@@ -3,6 +3,8 @@
   "version": "1.2.0",
   "description": "Timer and utility",
   "main": "index.js",
+  "types": "dist/index.d.ts",
+  "prepublish": "tsc",
   "scripts": {
     "test": "jest",
     "compile": "tsc -p ."

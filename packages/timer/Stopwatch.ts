@@ -1,10 +1,10 @@
 import moment, { Moment } from 'moment';
 
 type StopwatchConfiguration = {
-    startedAt: Moment;
+    startedAt?: Moment;
 };
 export class Stopwatch {
-    startedAt: Moment;
+    startedAt: Moment | null;
     laps: [Moment];
 
     constructor(configuration?: StopwatchConfiguration) {
